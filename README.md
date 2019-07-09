@@ -12,4 +12,4 @@ https://www.youtube.com/watch?v=viNgCsWecF0
 
 A full screen content-only UI inspired by [Notable's](https://github.com/notable/notable) full-screen focus mode. Content is written in markdown format and you can flip from edit mode to rendered reading mode by hitting escape. The `sundown` markdown renderer is built in - full markdown syntax is supported. I love the keyboard driven productivity of Slack's omnibox, so Ctrl-K brings up a quick note switcher... Type the name of a fresh note and hit enter to start composing something new! There's just enough functionality without a keyboard connected to make it possible to read previously composed notes.
 
-Building this was fun, it works particularly well outdoors in direct sunlight and is quite an enchanting experience for note taking and focused writing... I even used it to write this blog post!
+Building this was fun, it works particularly well outdoors in direct sunlight and is quite an enchanting experience for note taking and focused writing... I even used it to write this README!
