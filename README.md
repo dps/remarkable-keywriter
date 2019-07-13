@@ -7,7 +7,9 @@ I didn't buy one - it was expensive, and some of the reviews suggested the freew
 So, over the long weekend I decided to try turning my reMarkable, with a real keyboard connected via USB on-the-go into something as close to a Freewriter as I could make.
 
 Here it is: reMarkable keyWriter.
+![Image of reMarkable keyWriter](https://blog.singleton.io/static/imgs-remarkable-keywriter/keywriter.jpg)
 
+And here's a video of it in action on YouTube:
 https://www.youtube.com/watch?v=viNgCsWecF0
 
 A full screen content-only UI inspired by [Notable's](https://github.com/notable/notable) full-screen focus mode. Content is written in markdown format and you can flip from edit mode to rendered reading mode by hitting escape. The `sundown` markdown renderer is built in - full markdown syntax is supported. I love the keyboard driven productivity of Slack's omnibox, so Ctrl-K brings up a quick note switcher... Type the name of a fresh note and hit enter to start composing something new! There's just enough functionality without a keyboard connected to make it possible to read previously composed notes.
