@@ -13,7 +13,7 @@ jobs:
 
       - run:
           name: Install curl and xz
-          command: apt-get install -y curl xz
+          command: apt-get install -y curl xz-utils
 
       - run:
           name: Get toolchain
