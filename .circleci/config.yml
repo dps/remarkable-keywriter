@@ -8,9 +8,17 @@ jobs:
       - checkout
 
       - run:
-          name: Greeting
-          command: echo Hello, world.
+          name: Get toolchain
+          command: curl https://remarkable.engineering/deploy/sdk/poky-glibc-x86_64-meta-toolchain-qt5-cortexa9hf-neon-toolchain-2.1.3.sh -o install-toolchain.sh
 
       - run:
-          name: Print the Current Time
-          command: date
+          name: Install toolchain
+          command: ./install-toolchain.sh
+
+      - run:
+          name: Install qtcreator
+          command: apt-get install -y qtcreator
+
+      - run:
+          name: where are all the files?
+          command: ls
