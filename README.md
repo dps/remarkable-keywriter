@@ -15,3 +15,18 @@ https://www.youtube.com/watch?v=viNgCsWecF0
 A full screen content-only UI inspired by [Notable's](https://github.com/notable/notable) full-screen focus mode. Content is written in markdown format and you can flip from edit mode to rendered reading mode by hitting escape. The `sundown` markdown renderer is built in - full markdown syntax is supported. I love the keyboard driven productivity of Slack's omnibox, so Ctrl-K brings up a quick note switcher... Type the name of a fresh note and hit enter to start composing something new! There's just enough functionality without a keyboard connected to make it possible to read previously composed notes.
 
 Building this was fun, it works particularly well outdoors in direct sunlight and is quite an enchanting experience for note taking and focused writing... I even used it to write this README!
+
+# How to install on your own reMarkable
+
+* Follow the instructions at https://remarkablewiki.com/tech/ssh to set up passwordless ssh to your reMarkable
+* either build from source (a build script which you can use for insipration is in this repo at `.circleci/config.yml`) or use the prebuilt binary at `prebuilt/edit`
+* copy the binary onto your tablet `scp edit 10.11.99.1 /home/root/edit` (use the IP address and destination of your own set up). If you use the [draft](https://github.com/dixonary/draft-reMarkable) custom launcher, you'll find example config and an icon in `draft_files`.
+* Attach a USB keyboard with a USB OTG connector (e.g. [this one](https://www.amazon.com/dp/B015GZOHKW/ref=cm_sw_r_cp_tai_vzK-CbQ1FWJ3Z)). Note that Apple USB keyboards with built in USB hubs don't work - it needs to be a simple USB device, not a hub.
+* `ssh` to your remarkable and create the directory notes will be stored in
+  * `mkdir -p /home/root/edit`
+  * Add some content to the default scratch note:
+  * `echo scratch > /home/root/edit/scratch.md`
+* (if not using a custom launcher)
+    * ssh to your reMarkable
+    * kill the main UI `killall xochitl`
+    * start `edit`
