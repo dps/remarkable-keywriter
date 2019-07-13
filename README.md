@@ -20,7 +20,7 @@ Building this was fun, it works particularly well outdoors in direct sunlight an
 
 * Follow the instructions at https://remarkablewiki.com/tech/ssh to set up passwordless ssh to your reMarkable
 * either build from source (a build script which you can use for insipration is in this repo at `.circleci/config.yml`) or use the prebuilt binary at `prebuilt/edit`
-* copy the binary onto your tablet `scp edit 10.11.99.1 /home/root/edit` (use the IP address and destination of your own set up). If you use the [draft](https://github.com/dixonary/draft-reMarkable) custom launcher, you'll find example config and an icon in `draft_files`.
+* copy the binary onto your tablet `scp edit 10.11.99.1:/home/root/edit` (use the IP address and destination of your own set up). If you use the [draft](https://github.com/dixonary/draft-reMarkable) custom launcher, you'll find example config and an icon in `draft_files`.
 * Attach a USB keyboard with a USB OTG connector (e.g. [this one](https://www.amazon.com/dp/B015GZOHKW/ref=cm_sw_r_cp_tai_vzK-CbQ1FWJ3Z)). Note that Apple USB keyboards with built in USB hubs don't work - it needs to be a simple USB device, not a hub.
 * `ssh` to your remarkable and create the directory notes will be stored in
   * `mkdir -p /home/root/edit`
