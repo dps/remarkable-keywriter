@@ -12,8 +12,8 @@ jobs:
           command: apt-get update
 
       - run:
-          name: Install curl
-          command: apt-get install -y curl
+          name: Install curl and xz
+          command: apt-get install -y curl xz
 
       - run:
           name: Get toolchain
