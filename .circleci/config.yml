@@ -20,6 +20,10 @@ jobs:
           command: curl https://remarkable.engineering/deploy/sdk/poky-glibc-x86_64-meta-toolchain-qt5-cortexa9hf-neon-toolchain-2.1.3.sh -o install-toolchain.sh
 
       - run:
+          name: make toolchain executable
+          command: chmod +x ./install-toolchain.sh
+
+      - run:
           name: Install toolchain
           command: ./install-toolchain.sh
 
