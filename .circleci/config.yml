@@ -41,4 +41,4 @@ jobs:
 
       - run:
           name: where are all the files?
-          command: ls
+          command: find .
