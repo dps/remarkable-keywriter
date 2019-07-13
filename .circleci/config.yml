@@ -42,7 +42,7 @@ jobs:
           command: |
             source /opt/poky/2.1.3/environment-setup-cortexa9hf-neon-poky-linux-gnueabi
             qmake edit.pro -spec linux-oe-g++
-            /usr/bin/make qmake_all
+            /usr/bin/make
 
       - run:
           name: where are all the files?
