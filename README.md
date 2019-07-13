@@ -1,5 +1,7 @@
 # remarkable-keywriter
 
+*build status:* [![CircleCI](https://circleci.com/gh/dps/remarkable-keywriter.svg?style=svg)](https://circleci.com/gh/dps/remarkable-keywriter)
+
 More than a decade ago I had a [Psion 5mx](https://en.wikipedia.org/wiki/Psion_Series_5). A great little palmtop computer with a mechanical keyboard. I used it to take notes in meetings, to write stuff on trains and on beaches. This was before the mobile web was a thing, so my 5mx also had the awesome trait of helping me stay way more focused that writing on my PC. Last year, I found out about the [Freewrite](https://getfreewrite.com/) - a quirky eInk + mechanical keyboard single purpose writing machine. It *looks* pretty cool and the idea of a completely distraction-free device for _writing_, with a real mechanical keyboard, which would work well in direct sunlight - I was intrigued, maybe the 5mx was back?
 
 I didn't buy one - it was expensive, and some of the reviews suggested the freewrite was more novelty than useful appliance, so I bought a reMarkable tablet instead. The reMarkable is a great pen based, distraction-free note taker. But freehand notes, even with the handwriting recognition in the latest update aren't great for a certain kind of writing... composing a blog post for instance.
