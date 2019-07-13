@@ -12,7 +12,7 @@ jobs:
           command: apt-get update
 
       - run:
-          name: Install curl and xz
+          name: Install apt packages needed for build
           command: apt-get install -y curl xz-utils python git golang-go
 
       - run:
@@ -55,5 +55,6 @@ jobs:
       - run:
           command: |
               go get -u github.com/tcnksm/ghr
+              export GOPATH=.
               export PATH=/root/go/bin:$PATH
               if [ "${CIRCLE_TAG}" != "" ] ; then ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -replace ${CIRCLE_TAG} ./artifacts/; fi
