@@ -1,0 +1,5 @@
+name=keyWriter
+desc=The distraction free keyboard notetaker.
+call=/home/root/edit
+term=killall edit
+imgFile=keyboard
