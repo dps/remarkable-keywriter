@@ -14,6 +14,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp sundown/src/autolink.c sundown/src/buffer.c sundown/src/markdown.c sundown/src/stack.c sundown/html/houdini_href_e.c sundown/html/houdini_html_e.c sundown/html/html.c sundown/html/html_smartypants.c
 
+INCLUDEPATH += sundown/src
+INCLUDEPATH += sundown/html
+
 RESOURCES += qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
