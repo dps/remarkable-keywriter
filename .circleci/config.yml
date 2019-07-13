@@ -8,6 +8,10 @@ jobs:
       - checkout
 
       - run:
+          name: Install curl
+          command: apt-get install -y curl
+
+      - run:
           name: Get toolchain
           command: curl https://remarkable.engineering/deploy/sdk/poky-glibc-x86_64-meta-toolchain-qt5-cortexa9hf-neon-toolchain-2.1.3.sh -o install-toolchain.sh
 
