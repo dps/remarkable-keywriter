@@ -12,7 +12,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += main.cpp autolink.c buffer.c markdown.c stack.c houdini_href_e.c houdini_html_e.c html.c html_smartypants.c
+SOURCES += main.cpp sundown/src/autolink.c sundown/src/buffer.c sundown/src/markdown.c sundown/src/stack.c sundown/html/houdini_href_e.c sundown/html/houdini_html_e.c sundown/html/html.c sundown/html/html_smartypants.c
 
 RESOURCES += qml.qrc
 
