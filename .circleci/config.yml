@@ -53,6 +53,7 @@ jobs:
           destination: edit
 
       - run:
+          name: Ship tagged build artifacts to github
           command: |
               mkdir -p ./go
               export GOPATH=`pwd`/go
