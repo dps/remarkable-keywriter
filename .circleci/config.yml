@@ -8,6 +8,10 @@ jobs:
       - checkout
 
       - run:
+          name: update apt-cache
+          command: apt-get update
+
+      - run:
           name: Install curl
           command: apt-get install -y curl
 
