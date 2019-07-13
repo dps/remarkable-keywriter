@@ -55,7 +55,7 @@ jobs:
       - run:
           command: |
               mkdir -p ./go
-              export GOPATH=./go
+              export GOPATH=`pwd`/go
               go get -u github.com/tcnksm/ghr
               export PATH=/root/go/bin:$PATH
               if [ "${CIRCLE_TAG}" != "" ] ; then ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -replace ${CIRCLE_TAG} ./artifacts/; fi
