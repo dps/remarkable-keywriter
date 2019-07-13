@@ -41,7 +41,7 @@ jobs:
           name: Build
           command: |
             source /opt/poky/2.1.3/environment-setup-cortexa9hf-neon-poky-linux-gnueabi
-            qmake /zims/edit/edit.pro -spec linux-oe-g++
+            qmake edit.pro -spec linux-oe-g++
             /usr/bin/make qmake_all
 
       - run:
