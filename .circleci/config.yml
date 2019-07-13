@@ -43,7 +43,7 @@ jobs:
 
       - run:
           name: Build
-          command: /opt/poky/2.1.3/sysroots/x86_64-pokysdk-linux/usr/bin/qt5/qmake -spec linux-oe-g++ -o Makefile edit.pro
+          command: qmake /zims/edit/edit.pro -spec linux-oe-g++ && /usr/bin/make qmake_all
 
       - run:
           name: where are all the files?
