@@ -4,10 +4,11 @@ import Qt.labs.folderlistmodel 1.0
 import io.singleton 1.0
 
 Window {
+    id:root
     visible: true;
     title: qsTr("edit")
-    width: 1404;
-    height: 1872;
+    width: screen.width;
+    height: screen.height;
 
     property string doc: "# reMarkable key-writer";
     property int mode: 0;
@@ -15,12 +16,13 @@ Window {
     property bool isOmni: false;
     property string omniQuery: "";
     property string currentFile: "scratch.md";
+    property string folder: "file:/" + home_dir + "/edit/"
 
     EditUtils {
         id: utils
     }
     FolderListModel {
-        folder: "file:///home/root/edit/"
+        folder: folder
         id: folderModel
         nameFilters: ["*.md"]
     }
@@ -46,7 +48,7 @@ Window {
         var xhr = new XMLHttpRequest;
         xhr.open("GET", "file:///home/root/edit/" + name);
         xhr.onreadystatechange = function() {
-            if (xhr.readyState == XMLHttpRequest.DONE) {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
                 var response = xhr.responseText;
                 isOmni = false;
                 mode = 0;
@@ -59,7 +61,8 @@ Window {
 
     function saveFile() {
         console.log("Save " + currentFile);
-        var fileUrl = "file:///home/root/edit/" + currentFile;
+        var fileUrl = folder + currentFile;
+        console.log(fileUrl);
         var request = new XMLHttpRequest();
         request.open("PUT", fileUrl, false);
         request.send(doc);
@@ -69,7 +72,7 @@ Window {
 
     function initFile(name) {
         console.log("Init " + name);
-        var fileUrl = "file:///home/root/edit/" + name + ".md";
+        var fileUrl = folder + name + ".md";
         var request = new XMLHttpRequest();
         request.open("PUT", fileUrl, false);
         request.send("# " + name);
@@ -78,11 +81,13 @@ Window {
     }
 
     function handleKeyDown(event) {
-        if (event.key == Qt.Key_Control) {
+        if (event.key === Qt.Key_Control) {
             ctrlPressed = true;
-        } else if (event.key == Qt.Key_K && ctrlPressed) {
+        } else if (event.key === Qt.Key_K && ctrlPressed) {
             isOmni = !isOmni;
             event.accepted = true;
+        } else if (event.key === Qt.Key_Q && ctrlPressed){
+            Qt.quit();
         }
     }
     function handleKeyUp(event) {
@@ -113,18 +118,20 @@ Window {
 
     Rectangle {
         rotation: 90
-        anchors.top: parent.right
-        y: 200
-        width: 1404;
-        height: 1404;
+        id: body
+        width:root.height
+        height: root.width
+        anchors.centerIn: parent
         color: "white"
+        border.color: "black"
+        border.width: 2
         Flickable {
             id: flick
-            width: 1404;
-            height: 1404;
+            anchors.fill: parent
             contentWidth: query.paintedWidth
             contentHeight: query.paintedHeight
             clip: true
+
 
             function ensureVisible(r)
             {
@@ -147,17 +154,28 @@ Window {
 
             TextEdit {
                 id: query;
+                width: body.width
+                height: body.height
                 Keys.enabled: true;
                 wrapMode: TextEdit.Wrap;
                 textMargin: 12;
-                width:1404;
                 textFormat: mode == 0 ? TextEdit.RichText : TextEdit.PlainText;
                 font.family: mode == 0 ? "Noto Sans" : "Noto Mono";
                 text: mode == 0 ? utils.markdown(doc) : doc;
                 focus: !isOmni;
+                renderType: Text.NativeRendering
                 Component {
                     id: curDelegate
-                    Rectangle { width:8; height: 20; visible: query.cursorVisible; color: "black";}
+                    Item {
+                        width:18;
+                        visible: query.cursorVisible;
+                        Rectangle {
+                            anchors.bottom: parent.bottom
+                            color: "black"
+                            height:2
+                            width:parent.width
+                        }
+                    }
                 }
                 cursorDelegate: curDelegate;
                 readOnly: mode == 0 ? true : false;
