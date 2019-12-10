@@ -10,6 +10,7 @@ Window {
     width: screen.width;
     height: screen.height;
 
+    property int rotation: 90
     property string doc: "# reMarkable key-writer";
     property int mode: 0;
     property bool ctrlPressed: false;
@@ -18,19 +19,6 @@ Window {
     property string currentFile: "scratch.md";
     property string folder: "file://" + home_dir + "/edit/"
 
-    EditUtils {
-        id: utils
-    }
-    FolderListModel {
-        id: folderModel
-        folder: root.folder
-        nameFilters: ["*.md"]
-    }
-
-    Rectangle {
-        anchors.fill: parent
-        color: "white"
-    }
 
     readonly property int dummy: onLoad();
 
@@ -97,7 +85,7 @@ Window {
     }
 
     function handleKey(event) {
-        if (event.key == Qt.Key_Escape) {
+        if (event.key === Qt.Key_Escape) {
             if (isOmni) {
                 isOmni = false;
             } else {
@@ -106,25 +94,49 @@ Window {
             }
         }
 
-        if (mode == 0 && event.key == Qt.Key_Home) {
-            Qt.quit()
-        }
+        if (mode == 0)
+            switch(event.key) {
+                case Qt.Key_Home:
+                    Qt.quit()
+                    break;
+                case Qt.Key_Right:
+                    if (ctrlPressed)
+                        root.rotation = (root.rotation+90) % 360
+                    break;
+                case Qt.Key_Left:
+                    if (ctrlPressed)
+                        root.rotation = (root.rotation-90) % 360
+                    break;
+            }
     }
 
     function onLoad() {
         doLoad(currentFile);
         return 0;
     }
+    Rectangle {
+        anchors.fill: parent
+        color: "white"
+    }
 
     Rectangle {
-        rotation: 90
+        rotation: root.rotation
         id: body
-        width:root.height
-        height: root.width
+        width: (root.rotation / 90 ) % 2 ? root.height : root.width
+        height: (root.rotation / 90 ) % 2 ? root.width : root.height
         anchors.centerIn: parent
         color: "white"
         border.color: "black"
         border.width: 2
+        EditUtils {
+            id: utils
+        }
+        FolderListModel {
+            id: folderModel
+            folder: root.folder
+            nameFilters: ["*.md"]
+        }
+
         Flickable {
             id: flick
             anchors.fill: parent
@@ -211,7 +223,7 @@ Window {
     }
     Rectangle {
         id: quick
-        rotation: 90
+        rotation: root.rotation
         anchors.centerIn: parent;
         width: 700;
         height: 400;
