@@ -24,6 +24,7 @@ int main(int argc, char *argv[])
 
 
     QString configDir = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
+    qDebug() << configDir ;
 
     QGuiApplication app(argc, argv);
 

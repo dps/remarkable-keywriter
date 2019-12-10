@@ -16,14 +16,14 @@ Window {
     property bool isOmni: false;
     property string omniQuery: "";
     property string currentFile: "scratch.md";
-    property string folder: "file:/" + home_dir + "/edit/"
+    property string folder: "file://" + home_dir + "/edit/"
 
     EditUtils {
         id: utils
     }
     FolderListModel {
-        folder: folder
         id: folderModel
+        folder: root.folder
         nameFilters: ["*.md"]
     }
 
@@ -107,7 +107,7 @@ Window {
         }
 
         if (mode == 0 && event.key == Qt.Key_Home) {
-            isOmni = !isOmni;
+            Qt.quit()
         }
     }
 
