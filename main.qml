@@ -17,10 +17,7 @@ Window {
     property bool isOmni: false;
     property string omniQuery: "";
     property string currentFile: "scratch.md";
-    property string folder: "file://" + home_dir + "/edit/"
-
-
-    readonly property int dummy: onLoad();
+    property string folder: "file://%1/edit/".arg(home_dir)
 
     function toggleMode() {
         if (mode == 0) {
@@ -34,7 +31,7 @@ Window {
 
     function doLoad(name) {
         var xhr = new XMLHttpRequest;
-        xhr.open("GET", "file:///home/root/edit/" + name);
+        xhr.open("GET", folder + name);
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 var response = xhr.responseText;
@@ -79,7 +76,7 @@ Window {
         }
     }
     function handleKeyUp(event) {
-        if (event.key == Qt.Key_Control) {
+        if (event.key === Qt.Key_Control) {
             ctrlPressed = false;
         }
     }
@@ -110,10 +107,10 @@ Window {
             }
     }
 
-    function onLoad() {
+    Component.onCompleted: {
         doLoad(currentFile);
-        return 0;
     }
+
     Rectangle {
         anchors.fill: parent
         color: "white"
@@ -122,8 +119,8 @@ Window {
     Rectangle {
         rotation: root.rotation
         id: body
-        width: (root.rotation / 90 ) % 2 ? root.height : root.width
-        height: (root.rotation / 90 ) % 2 ? root.width : root.height
+        width: root.rotation % 180 ? root.height : root.width
+        height: root.rotation % 180 ? root.width : root.height
         anchors.centerIn: parent
         color: "white"
         border.color: "black"
@@ -183,6 +180,7 @@ Window {
                         visible: query.cursorVisible;
                         Rectangle {
                             anchors.bottom: parent.bottom
+                            anchors.bottomMargin: 4
                             color: "black"
                             height:2
                             width:parent.width
@@ -199,10 +197,10 @@ Window {
                 }
 
                 Keys.onPressed: {
-                    if (mode == 0 && (event.key == Qt.Key_Down || event.key == Qt.Key_Left)) {
+                    if (mode == 0 && (event.key === Qt.Key_Down || event.key === Qt.Key_Left)) {
                         flick.scrollDown();
                     }
-                    if (mode == 0 && (event.key == Qt.Key_Up || event.key == Qt.Key_Right)) {
+                    if (mode == 0 && (event.key === Qt.Key_Up || event.key === Qt.Key_Right)) {
                         flick.scrollUp();
                     }
 
@@ -220,13 +218,11 @@ Window {
             }
         }
 
-    }
     Rectangle {
         id: quick
-        rotation: root.rotation
         anchors.centerIn: parent;
-        width: 700;
-        height: 400;
+        width: parent.width * 0.6;
+        height: parent.height * 0.6;
         color: "black"
         visible: isOmni ? true : false;
         radius: 20;
@@ -238,7 +234,7 @@ Window {
             text: omniQuery;
             textFormat: TextEdit.PlainText;
             x: 40;
-            width:680;
+            width:parent.width - 20
             color: "white";
             font.pointSize: 24;
             font.family: "Noto Mono";
@@ -267,24 +263,31 @@ Window {
                 folderModel.nameFilters = [omniQuery + "*"];
             }
 
-            anchors {top: parent.top + 10; left: parent.left + 10}
-            Keys.forwardTo: [omniList]
+            Keys.forwardTo: omniList
         }
         ListView {
             id: omniList;
-            x: 40;
-            width: 600; height: 300;
             anchors.top: omniQueryTextEdit.bottom;
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.leftMargin: 40
+            anchors.rightMargin: 40
+            anchors.right: parent.right
+            highlightResizeDuration: 0
             highlight: Rectangle { color: "white"; radius: 5;width: 600; }
             Component {
                 id: fileDelegate
-                Text { width:600; text: fileName; color: ListView.isCurrentItem ? "black" : "white";}
+                Text {
+                    width:parent.width
+                    text: fileName;
+                    color: ListView.isCurrentItem ? "black" : "white";
+                }
             }
 
             model: folderModel
             delegate: fileDelegate
         }
-
+    }
     }
 
 }
