@@ -1,4 +1,4 @@
-import QtQuick 2.6
+import QtQuick 2.11
 import QtQuick.Window 2.2
 import Qt.labs.folderlistmodel 1.0
 import io.singleton 1.0
@@ -112,11 +112,6 @@ Window {
     }
 
     Rectangle {
-        anchors.fill: parent
-        color: "white"
-    }
-
-    Rectangle {
         rotation: root.rotation
         id: body
         width: root.rotation % 180 ? root.height : root.width
@@ -137,6 +132,7 @@ Window {
         Flickable {
             id: flick
             anchors.fill: parent
+            boundsBehavior: Flickable.StopAtBounds
             contentWidth: query.paintedWidth
             contentHeight: query.paintedHeight
             clip: true
@@ -155,6 +151,7 @@ Window {
             }
 
             function scrollUp() {
+                //todo: check constraints
                 contentY -= 400;
             }
             function scrollDown() {
