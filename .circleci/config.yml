@@ -38,6 +38,13 @@ jobs:
           command: apt-get install -y qtcreator
 
       - run:
+          name: Install ghr before sourcing new toolchain
+          command: |
+              mkdir -p ./go
+              export GOPATH=`pwd`/go
+              go get -u github.com/tcnksm/ghr
+
+      - run:
           name: Build
           command: |
             source /usr/local/oecore-x86_64/environment-setup-cortexa9hf-neon-oe-linux-gnueabi
@@ -55,8 +62,8 @@ jobs:
       - run:
           name: Ship tagged build artifacts to github
           command: |
-              mkdir -p ./go
-              export GOPATH=`pwd`/go
-              go get -u github.com/tcnksm/ghr
+              #mkdir -p ./go
+              #export GOPATH=`pwd`/go
+              #go get -u github.com/tcnksm/ghr
               export PATH=/root/go/bin:$PATH
               if [ "${CIRCLE_TAG}" != "" ] ; then ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -replace ${CIRCLE_TAG} ./artifacts/; fi
