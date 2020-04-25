@@ -13,7 +13,7 @@ jobs:
 
       - run:
           name: Install apt packages needed for build
-          command: apt-get install -y curl xz-utils python git golang-go
+          command: apt-get install -y curl xz-utils python git golang-go bsdtar wget
 
       - run:
           name: pull submodules
@@ -23,7 +23,7 @@ jobs:
 
       - run:
           name: Get toolchain
-          command: curl https://remarkable.engineering/deploy/sdk/poky-glibc-x86_64-meta-toolchain-qt5-cortexa9hf-neon-toolchain-2.1.3.sh -o install-toolchain.sh
+          command: curl https://remarkable.engineering/oecore-x86_64-cortexa9hf-neon-toolchain-zero-gravitas-1.8-23.9.2019.sh -o install-toolchain.sh
 
       - run:
           name: make toolchain executable
@@ -38,9 +38,21 @@ jobs:
           command: apt-get install -y qtcreator
 
       - run:
+          name: Install ghr before sourcing new toolchain
+          command: |
+              wget https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz
+              tar -xvf go1.14.2.linux-amd64.tar.gz
+              mv go /usr/local/
+              export GOROOT=/usr/local/go
+              mkdir -p ./go
+              export GOPATH=`pwd`/go
+              export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+              go get -u github.com/tcnksm/ghr
+
+      - run:
           name: Build
           command: |
-            source /opt/poky/2.1.3/environment-setup-cortexa9hf-neon-poky-linux-gnueabi
+            source /usr/local/oecore-x86_64/environment-setup-cortexa9hf-neon-oe-linux-gnueabi
             qmake edit.pro -spec linux-oe-g++
             /usr/bin/make
 
@@ -55,8 +67,4 @@ jobs:
       - run:
           name: Ship tagged build artifacts to github
           command: |
-              mkdir -p ./go
-              export GOPATH=`pwd`/go
-              go get -u github.com/tcnksm/ghr
-              export PATH=/root/go/bin:$PATH
               if [ "${CIRCLE_TAG}" != "" ] ; then ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -replace ${CIRCLE_TAG} ./artifacts/; fi
