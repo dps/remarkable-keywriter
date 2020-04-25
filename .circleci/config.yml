@@ -40,8 +40,13 @@ jobs:
       - run:
           name: Install ghr before sourcing new toolchain
           command: |
+              wget https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz
+              tar -xvf go1.14.2.linux-amd64.tar.gz
+              mv go /usr/local/
+              export GOROOT=/usr/local/go
               mkdir -p ./go
               export GOPATH=`pwd`/go
+              export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
               go get -u github.com/tcnksm/ghr
 
       - run:
@@ -65,5 +70,4 @@ jobs:
               #mkdir -p ./go
               #export GOPATH=`pwd`/go
               #go get -u github.com/tcnksm/ghr
-              export PATH=/root/go/bin:$PATH
               if [ "${CIRCLE_TAG}" != "" ] ; then ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -replace ${CIRCLE_TAG} ./artifacts/; fi
