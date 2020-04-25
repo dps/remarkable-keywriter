@@ -13,7 +13,7 @@ jobs:
 
       - run:
           name: Install apt packages needed for build
-          command: apt-get install -y curl xz-utils python git golang-go
+          command: apt-get install -y curl xz-utils python git golang-go bsdtar
 
       - run:
           name: pull submodules
