@@ -67,7 +67,4 @@ jobs:
       - run:
           name: Ship tagged build artifacts to github
           command: |
-              #mkdir -p ./go
-              #export GOPATH=`pwd`/go
-              #go get -u github.com/tcnksm/ghr
               if [ "${CIRCLE_TAG}" != "" ] ; then ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -replace ${CIRCLE_TAG} ./artifacts/; fi
