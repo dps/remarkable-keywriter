@@ -15,6 +15,7 @@ Window {
     property bool isOmni: false;
     property string omniQuery: "";
     property string currentFile: "scratch.md";
+    property int fontSizeEditing: 11;
 
     EditUtils {
         id: utils
@@ -152,7 +153,9 @@ Window {
                 textMargin: 12;
                 width:1404;
                 textFormat: mode == 0 ? TextEdit.RichText : TextEdit.PlainText;
-                font.family: mode == 0 ? "Noto Sans" : "Noto Mono";
+                //font.family: mode == 0 ? "Noto Sans" : "Noto Mono";
+		font.family: mode == 0 ? "Noto Serif" : "Hack";
+		//font.family: mode == 0 ? "Latin Modern Roman" : "Hack";
                 text: mode == 0 ? utils.markdown(doc) : doc;
                 focus: !isOmni;
                 Component {
@@ -161,7 +164,7 @@ Window {
                 }
                 cursorDelegate: curDelegate;
                 readOnly: mode == 0 ? true : false;
-                font.pointSize: mode == 0 ? 12 : 18;
+                font.pointSize: mode == 0 ? 12 : fontSizeEditing;
 
                 onLinkActivated: {
                     console.log("Link activated: " + link);
