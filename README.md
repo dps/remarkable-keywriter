@@ -22,6 +22,8 @@ Building this was fun, it works particularly well outdoors in direct sunlight an
 
 # How to install on your own reMarkable
 
+If you have toltec installed, just install with `opkg install keywriter`. Otherwise use the following steps:
+
 * Follow the instructions at https://remarkablewiki.com/tech/ssh to set up passwordless ssh to your reMarkable
 * either build from source (a build script which you can use for insipration is in this repo at `.circleci/config.yml`) or use the prebuilt binary at `prebuilt/edit`
 * copy the binary onto your tablet `scp edit 10.11.99.1:/home/root/edit` (use the IP address and destination of your own set up). If you use the [draft](https://github.com/dixonary/draft-reMarkable) custom launcher, you'll find example config and an icon in `draft_files`.
