@@ -1,4 +1,4 @@
-# remarkable-keywriter [![opkg](https://img.shields.io/badge/OPKG-keywriter-blue)](https://github.com/matteodelabre/toltec)
+# remarkable-keywriter [![opkg](https://img.shields.io/badge/OPKG-keywriter-blue)](https://toltec-dev.org/)
 
 master build status: [![CircleCI](https://circleci.com/gh/dps/remarkable-keywriter.svg?style=svg)](https://circleci.com/gh/dps/remarkable-keywriter)
 
