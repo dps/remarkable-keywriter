@@ -1,4 +1,4 @@
-# remarkable-keywriter
+# remarkable-keywriter [![opkg](https://img.shields.io/badge/OPKG-keywriter-blue)](https://toltec-dev.org/)
 
 master build status: [![CircleCI](https://circleci.com/gh/dps/remarkable-keywriter.svg?style=svg)](https://circleci.com/gh/dps/remarkable-keywriter)
 
@@ -21,6 +21,8 @@ A full screen content-only UI inspired by [Notable's](https://github.com/notable
 Building this was fun, it works particularly well outdoors in direct sunlight and is quite an enchanting experience for note taking and focused writing... I even used it to write this README!
 
 # How to install on your own reMarkable
+
+If you have toltec installed, just install with `opkg install keywriter`. Otherwise use the following steps:
 
 * Follow the instructions at https://remarkablewiki.com/tech/ssh to set up passwordless ssh to your reMarkable
 * either build from source (a build script which you can use for insipration is in this repo at `.circleci/config.yml`) or use the prebuilt binary at `prebuilt/edit`
