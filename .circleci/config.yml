@@ -32,7 +32,7 @@ jobs:
       - run:
           name: Install toolchain
           command: |
-            locale-gen
+            locale
             ./install-toolchain.sh
 
       - run:
