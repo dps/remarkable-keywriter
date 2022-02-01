@@ -31,7 +31,9 @@ jobs:
 
       - run:
           name: Install toolchain
-          command: ./install-toolchain.sh
+          command: |
+            locale-gen
+            ./install-toolchain.sh
 
       - run:
           name: Install qtcreator
