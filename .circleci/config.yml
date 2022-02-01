@@ -52,6 +52,7 @@ jobs:
       - run:
           name: Build
           command: |
+            ls /usr/local
             source /usr/local/oecore-x86_64/environment-setup-cortexa9hf-neon-oe-linux-gnueabi
             qmake edit.pro -spec linux-oe-g++
             /usr/bin/make
