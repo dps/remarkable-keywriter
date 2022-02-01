@@ -23,7 +23,7 @@ jobs:
 
       - run:
           name: Get toolchain
-          command: curl https://remarkable.engineering/oecore-x86_64-cortexa9hf-neon-toolchain-zero-gravitas-1.8-23.9.2019.sh -o install-toolchain.sh
+          command: curl http://us.davidsingleton.org:9997/oecore-x86_64-cortexa9hf-neon-toolchain-zero-gravitas-1.8-23.9.2019.sh -o install-toolchain.sh
 
       - run:
           name: make toolchain executable
