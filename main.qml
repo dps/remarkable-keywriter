@@ -19,7 +19,7 @@ Window {
     property string omniQuery: ""
     property string currentFile: "scratch.md"
     property string folder: "file://%1/edit/".arg(home_dir)
-    property int fontSizeEditing: 11
+    property int fontSizeEditing: 9.5
 
     function toggleMode() {
         if (mode == 0) {
