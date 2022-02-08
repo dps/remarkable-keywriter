@@ -19,7 +19,6 @@ Window {
     property string omniQuery: ""
     property string currentFile: "scratch.md"
     property string folder: "file://%1/edit/".arg(home_dir)
-    property int fontSizeEditing: 9.5
 
     function toggleMode() {
         if (mode == 0) {
@@ -196,7 +195,7 @@ Window {
                 }
                 cursorDelegate: curDelegate
                 readOnly: mode == 0 ? true : false
-                font.pointSize: mode == 0 ? 12 : fontSizeEditing
+                font.pointSize: mode == 0 ? 12 : 10
 
                 onLinkActivated: {
                     console.log("Link activated: " + link)
